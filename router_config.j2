@@ -1,0 +1,29 @@
+hostname {{ hostname }}
+
+interface {{ inside_interface }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ inside_ip }} {{ inside_mask }}
+ no shutdown
+ ip nat inside
+ ip ospf 1 area 0
+
+interface {{ outside_interface }}
+ ip address {{ outside_ip }} {{ outside_mask }}
+ no shutdown
+ ip nat outside
+
+ip access-list standard NAT_ACL
+ permit {{ subnet }}
+
+ip nat inside source list NAT_ACL interface {{ outside_interface }} overload
+
+router ospf 1
+ network {{ subnet }} {{ wildcard }} area 0
+ default-information originate always
+
+line vty 0 4
+ access-class 10 in
+ transport input ssh telnet
+
+ip access-list standard 10
+ permit 192.168.1.0 0.0.0.255
