@@ -9,11 +9,11 @@ router_data = {
     "hostname": "R2",
     "vrf_name": "control-data",
     "inside_interface": "GigabitEthernet0/1",
-    "inside_ip": "172.31.14.9",
+    "inside_ip": "172.31.14.8",
     "inside_mask": "255.255.255.240",
     "outside_interface": "GigabitEthernet0/3",
-    "outside_ip": "203.0.113.2",  # NAT-facing IP
-    "outside_mask": "255.255.255.252",
+    "outside_ip": "192.168.122.204",   
+    "outside_mask": "255.255.255.0",
     "subnet": "172.31.14.0",
     "wildcard": "0.0.0.15"
 }
